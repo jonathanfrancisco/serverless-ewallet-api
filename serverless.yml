@@ -1,0 +1,43 @@
+service:
+  name: serverless-ewallet-api
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  snsTopicName: CashInSNSTopic
+
+environment:
+  snsTopicName: ${self:custom.snsTopicName}
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  profile: serverlessUser
+  stage: ${opt:stage, 'dev'}
+  runtime: nodejs12.x
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - SNS:Publish
+      Resource:
+        - 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
+
+functions:
+  cashIn:
+    handler: useCases/cashIn.handler
+    events:
+      - http:
+          method: POST
+          path: cashIn
+  logTransactionAndSendSms:
+    handler: useCases/logTransactionAndSendSms.handler
+    events:
+      - sns:
+          arn: 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
