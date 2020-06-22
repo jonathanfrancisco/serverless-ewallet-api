@@ -15,7 +15,7 @@ plugins:
 
 provider:
   name: aws
-  profile: serverlessUser
+  # profile: serverlessUser
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'ap-southeast-1'}
   runtime: nodejs12.x
@@ -29,7 +29,6 @@ provider:
         - SNS:Publish
       Resource:
         - 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
-
 
 resources:
   Resources:
@@ -49,7 +48,6 @@ resources:
         AutoVerifiedAttributes:
           - email
 
-
 functions:
   cashIn:
     handler: useCases/cashIn.handler
@@ -61,4 +59,4 @@ functions:
     handler: useCases/logTransactionAndSendSms.handler
     events:
       - sns:
-          arn: Fn::Sub: 'aws:sns:${AWS::REGION}:552434643125:MySNSTopic'
+          arn: 'aws:sns:${AWS::REGION}:552434643125:MySNSTopic'
