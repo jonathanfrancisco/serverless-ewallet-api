@@ -30,6 +30,26 @@ provider:
       Resource:
         - 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
 
+
+resources:
+  Resources:
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:custom.cognitoUserPoolName}
+        UsernameAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 6
+            RequireLowercase: false
+            RequireNumbers: false
+            RequireSymbols: false
+            RequireUppercase: false
+        AutoVerifiedAttributes:
+          - email
+
+
 functions:
   cashIn:
     handler: useCases/cashIn.handler
@@ -41,4 +61,4 @@ functions:
     handler: useCases/logTransactionAndSendSms.handler
     events:
       - sns:
-          arn: 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
+          arn: Fn::Sub: 'aws:sns:${AWS::REGION}:552434643125:MySNSTopic'
