@@ -41,8 +41,8 @@ resources:
             RequireNumbers: false
             RequireSymbols: false
             RequireUppercase: false
-        AutoVerifiedAttributes:
-          - email
+        # AutoVerifiedAttributes:
+        #   - email
 
     CognitoUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
