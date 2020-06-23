@@ -11,7 +11,7 @@ plugins:
 
 provider:
   name: aws
-  profile: serverlessUser
+  # profile: serverlessUser
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'ap-southeast-1'}
   runtime: nodejs12.x
@@ -27,7 +27,7 @@ provider:
         - 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
 
 resources:
-  Resources: ${file(./resources/EwalletCognitoUserPool.yml)}
+  Resources: ${file(resources/EwalletCognitoUserPool.yml)}
 functions:
   cashIn:
     handler: useCases/cashIn.handler
