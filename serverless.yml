@@ -66,14 +66,14 @@ resources:
           - profile
           - aws.cognito.signin.user.admin
         UserPoolId:
-          Ref: CognitoUserPool
+          Ref: EWalletCognitoUserPool
 
     CognitoUserPoolDomain:
       Type: AWS::Cognito::UserPoolDomain
       Properties:
         Domain: serverless-ewallet
         UserPoolId:
-          Ref: CognitoUserPool
+          Ref: EWalletCognitoUserPool
 
 functions:
   cashIn:
