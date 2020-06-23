@@ -15,7 +15,7 @@ plugins:
 
 provider:
   name: aws
-  # profile: serverlessUser
+  profile: serverlessUser
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'ap-southeast-1'}
   runtime: nodejs12.x
