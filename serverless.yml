@@ -27,7 +27,7 @@ provider:
         - 'arn:aws:sns:ap-southeast-1:552434643125:MySNSTopic'
 
 resources:
-  - ${file('./resources/EWalletCognitoUserPool.yml')}
+  - ${file(./resources/EWalletCognitoUserPool.yml)}
 functions:
   cashIn:
     handler: useCases/cashIn.handler
