@@ -1,47 +1,46 @@
-Resources:
-  EWalletCognitoUserPool:
-    Type: AWS::Cognito::UserPool
-    Properties:
-      UserPoolName: EWalletCognitoUserPool
-      UsernameAttributes:
-        - email
-      Policies:
-        PasswordPolicy:
-          MinimumLength: 6
-          RequireLowercase: false
-          RequireNumbers: false
-          RequireSymbols: false
-          RequireUppercase: false
-      AutoVerifiedAttributes:
-        - email
+EWalletCognitoUserPool:
+  Type: AWS::Cognito::UserPool
+  Properties:
+    UserPoolName: EWalletCognitoUserPool
+    UsernameAttributes:
+      - email
+    Policies:
+      PasswordPolicy:
+        MinimumLength: 6
+        RequireLowercase: false
+        RequireNumbers: false
+        RequireSymbols: false
+        RequireUppercase: false
+    AutoVerifiedAttributes:
+      - email
 
-  CognitoUserPoolClient:
-    Type: AWS::Cognito::UserPoolClient
-    Properties:
-      ClientName: EWalletCognitoUserPool-Client
-      ExplicitAuthFlows:
-        - ALLOW_USER_PASSWORD_AUTH
-        - ALLOW_REFRESH_TOKEN_AUTH
-      GenerateSecret: false
-      AllowedOAuthFlowsUserPoolClient: true
-      SupportedIdentityProviders:
-        - COGNITO
-      CallbackURLs:
-        - https://localhost:3000
-      AllowedOAuthFlows:
-        - code
-      AllowedOAuthScopes:
-        - phone
-        - email
-        - openid
-        - profile
-        - aws.cognito.signin.user.admin
-      UserPoolId:
-        Ref: CognitoUserPool
+CognitoUserPoolClient:
+  Type: AWS::Cognito::UserPoolClient
+  Properties:
+    ClientName: EWalletCognitoUserPool-Client
+    ExplicitAuthFlows:
+      - ALLOW_USER_PASSWORD_AUTH
+      - ALLOW_REFRESH_TOKEN_AUTH
+    GenerateSecret: false
+    AllowedOAuthFlowsUserPoolClient: true
+    SupportedIdentityProviders:
+      - COGNITO
+    CallbackURLs:
+      - https://localhost:3000
+    AllowedOAuthFlows:
+      - code
+    AllowedOAuthScopes:
+      - phone
+      - email
+      - openid
+      - profile
+      - aws.cognito.signin.user.admin
+    UserPoolId:
+      Ref: CognitoUserPool
 
-  CognitoUserPoolDomain:
-    Type: AWS::Cognito::UserPoolDomain
-    Properties:
-      Domain: serverless-ewallet
-      UserPoolId:
-        Ref: CognitoUserPool
+CognitoUserPoolDomain:
+  Type: AWS::Cognito::UserPoolDomain
+  Properties:
+    Domain: serverless-ewallet
+    UserPoolId:
+      Ref: CognitoUserPool
