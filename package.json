@@ -11,7 +11,7 @@
     "@middy/http-error-handler": "^1.0.0",
     "@middy/http-json-body-parser": "^1.0.0",
     "@middy/validator": "^1.0.0",
-    "aws-sdk": "^2.701.0",
+    "aws-sdk": "^2.814.0",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {
